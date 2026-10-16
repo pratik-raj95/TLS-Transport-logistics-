@@ -63,7 +63,7 @@ export default function PrivacyPolicyPage() {
               3. Communication & Direct Inquiries
             </h2>
             <p className="text-sm text-zinc-600">
-              When inquiries are initiated via our official website forms or WhatsApp dispatch channels, communication is directed strictly to our registered operations hub at {SITE_CONFIG.address}. You may reach out directly to our desk at {SITE_CONFIG.phoneDisplay}.
+              When inquiries are initiated via our official website forms or WhatsApp dispatch channels, communication is directed strictly to our registered operations hub at {SITE_CONFIG.address} You may reach out directly to our desk at {SITE_CONFIG.phoneDisplay}.
             </p>
           </div>
         </MotionReveal>

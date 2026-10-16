@@ -215,7 +215,7 @@ export function QuotePlannerForm() {
           </button>
 
           <p className="text-center text-[11px] text-zinc-400">
-            Instant dispatch confirmation with our central desk at {SITE_CONFIG.address}.
+            Instant dispatch confirmation with our central desk at {SITE_CONFIG.address}
           </p>
         </form>
       )}

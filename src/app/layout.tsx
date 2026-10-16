@@ -48,8 +48,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LogisticsService",
+    name: SITE_CONFIG.brandName,
+    legalName: SITE_CONFIG.companyName,
+    description: "Enterprise transport, commercial fleet, and nationwide logistics solutions across India.",
+    url: "https://www.tlstransport.in",
+    telephone: SITE_CONFIG.phoneLink.replace("tel:", ""),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Plot No. 201, Sector 8, MET City, Yakubpur",
+      addressLocality: "Jhajjar",
+      addressRegion: "Haryana",
+      postalCode: "124515",
+      addressCountry: "India",
+    },
+  };
+
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-white text-zinc-900 selection:bg-[#D32F2F] selection:text-white antialiased">
         <Navbar />
         <main className="flex-grow">{children}</main>

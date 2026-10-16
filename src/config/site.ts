@@ -70,7 +70,7 @@ export const SITE_CONFIG = {
   address: "Plot No. 201, Sector 8, MET City, Yakubpur, Jhajjar, Haryana 124515, India.",
   workingHours: "Monday – Saturday: 9:00 AM – 8:00 PM (IST)",
   hubLocation: "MET City, Jhajjar, Haryana",
-  googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.7728981144026!2d76.819349!3d28.516487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d704bb772d1f7%3A0xb35a519ee4adfb26!2sMET%20City%20Reliance!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
+  googleMapsEmbed: "https://maps.google.com/maps?q=Plot+No.+201%2C+Sector+8%2C+MET+City%2C+Yakubpur%2C+Jhajjar%2C+Haryana+124515%2C+India&t=&z=15&ie=UTF8&iwloc=&output=embed",
 
   navLinks: [
     { label: "Home", href: "/" },
@@ -647,7 +647,7 @@ export const SITE_CONFIG = {
       state: "Haryana",
       region: "North",
       role: "Central Operations & Fleet Dispatch Depot",
-      address: "Plot No. 201, Sector 8, MET City, Yakubpur, Jhajjar, Haryana 124515",
+      address: "Plot No. 201, Sector 8, MET City, Yakubpur, Jhajjar, Haryana 124515, India.",
       coverage: "Delhi NCR, Gurugram, Manesar, Bawal, Kundli, Sonipat, Rohtak, Panipat"
     },
     {
@@ -756,7 +756,7 @@ export const SITE_CONFIG = {
     },
     {
       question: "Where is TLS Transport's central operations hub located?",
-      answer: "Our registered operational hub is located at Plot No. 201, Sector 8, MET City, Yakubpur, Jhajjar, Haryana 124515. This strategic location gives us direct arterial connectivity to the Delhi-Mumbai Industrial Corridor, Western Dedicated Freight Corridor, and Northern manufacturing belts.",
+      answer: "Our registered operational hub is located at Plot No. 201, Sector 8, MET City, Yakubpur, Jhajjar, Haryana 124515, India. This strategic location gives us direct arterial connectivity to the Delhi-Mumbai Industrial Corridor, Western Dedicated Freight Corridor, and Northern manufacturing belts.",
       category: "Operations"
     },
     {

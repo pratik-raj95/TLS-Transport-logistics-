@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-red: #D32F2F;
+  --color-brand-red-hover: #b71c1c;
+  --color-brand-red-dark: #8E0000;
+  --color-brand-red-light: #FFEBEE;
+  --color-dark-bg: #0B0B0B;
+  --color-dark-card: #141414;
+  --color-dark-border: #222222;
+  --color-topbar: #1A1A1A;
+}
+
+:root {
+  --brand-red: #D32F2F;
+  --brand-red-dark: #b71c1c;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+body {
+  background-color: #ffffff;
+  color: #18181b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #D32F2F;
+  color: #ffffff;
+}
+
+/* Custom stroke for hero title outlined text */
+.text-stroke-white {
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.95);
+  color: transparent;
+}
+
+.text-stroke-white-thin {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.85);
+  color: transparent;
+}
+
+/* Glassmorphism utility */
+.glass-header {
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-header-dark {
+  background-color: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}

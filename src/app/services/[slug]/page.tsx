@@ -6,6 +6,7 @@ import { CheckCircle2, Truck, ShieldCheck, ChevronRight, HelpCircle } from "luci
 import { SITE_CONFIG } from "@/config/site";
 import { ContactForm } from "@/components/ContactForm";
 import { CtaBanner } from "@/components/CtaBanner";
+import { MotionHero, MotionReveal } from "@/components/motion/MotionWrapper";
 
 export async function generateStaticParams() {
   const baseParams = SITE_CONFIG.services.map((svc) => ({
@@ -48,17 +49,23 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
             <span className="text-white">{service.title}</span>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-xs font-bold tracking-[0.2em] text-white uppercase bg-white/5 backdrop-blur-md mb-4">
-            {service.category}
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl">
-            {service.title}
-          </h1>
-
-          <p className="text-zinc-400 text-base sm:text-lg md:text-xl max-w-3xl mt-4 leading-relaxed font-normal">
-            {service.shortDesc}
-          </p>
+          <MotionHero
+            eyebrow={
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-xs font-bold tracking-[0.2em] text-white uppercase bg-white/5 backdrop-blur-md mb-4">
+                {service.category}
+              </div>
+            }
+            heading={
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl">
+                {service.title}
+              </h1>
+            }
+            description={
+              <p className="text-zinc-400 text-base sm:text-lg md:text-xl max-w-3xl mt-4 leading-relaxed font-normal">
+                {service.shortDesc}
+              </p>
+            }
+          />
         </div>
       </section>
 
@@ -69,116 +76,130 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
             {/* Left Column: Details (7 cols) */}
             <div className="lg:col-span-7 space-y-10">
               {/* Featured Image */}
-              <div className="relative aspect-[16/10] w-full rounded-3xl overflow-hidden shadow-xl border border-zinc-200">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
+              <MotionReveal direction="up" distance={16}>
+                <div className="relative aspect-[16/10] w-full rounded-3xl overflow-hidden shadow-xl border border-zinc-200">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </MotionReveal>
 
               {/* Comprehensive Description */}
-              <div className="space-y-4">
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">
-                  Service Overview
-                </h2>
-                <p className="text-zinc-600 text-base leading-relaxed">
-                  {service.fullDesc}
-                </p>
-              </div>
+              <MotionReveal direction="up" distance={14} delay={0.08}>
+                <div className="space-y-4">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">
+                    Service Overview
+                  </h2>
+                  <p className="text-zinc-600 text-base leading-relaxed">
+                    {service.fullDesc}
+                  </p>
+                </div>
+              </MotionReveal>
 
               {/* Key Highlights */}
-              <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200 space-y-4">
-                <h3 className="text-xl font-bold text-zinc-900 flex items-center gap-2">
-                  <Truck className="w-5 h-5 text-[#D32F2F]" />
-                  Operational Highlights & Capabilities
-                </h3>
-                <div className="grid sm:grid-cols-2 gap-3 pt-2">
-                  {service.highlights.map((item) => (
-                    <div key={item} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#D32F2F] shrink-0 mt-1" />
-                      <span className="text-sm text-zinc-700 font-medium">
-                        {item}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Cargo Types Handled */}
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-zinc-900">
-                  Typical Cargo Handled
-                </h3>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {service.cargoTypes.map((cargo) => (
-                    <div
-                      key={cargo}
-                      className="p-4 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center gap-3"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-[#D32F2F]" />
-                      <span className="text-sm font-semibold text-zinc-800">
-                        {cargo}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Operational Benefits */}
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-zinc-900 flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-[#D32F2F]" />
-                  Key Operational Advantages
-                </h3>
-                <ul className="space-y-3">
-                  {service.operationalBenefits.map((ben) => (
-                    <li
-                      key={ben}
-                      className="flex items-start gap-3 text-sm text-zinc-600"
-                    >
-                      <div className="w-5 h-5 rounded-full bg-red-50 text-[#D32F2F] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
-                        ✓
-                      </div>
-                      <span className="leading-relaxed">{ben}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Service FAQs */}
-              {service.faqs && service.faqs.length > 0 && (
-                <div className="space-y-4 pt-6 border-t border-zinc-200">
+              <MotionReveal direction="up" distance={14} delay={0.12}>
+                <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200 space-y-4">
                   <h3 className="text-xl font-bold text-zinc-900 flex items-center gap-2">
-                    <HelpCircle className="w-5 h-5 text-[#D32F2F]" />
-                    Frequently Asked Questions
+                    <Truck className="w-5 h-5 text-[#D32F2F]" />
+                    Operational Highlights & Capabilities
                   </h3>
-                  <div className="space-y-3">
-                    {service.faqs.map((faq) => (
-                      <div
-                        key={faq.question}
-                        className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200"
-                      >
-                        <h4 className="font-bold text-zinc-900 text-sm mb-1.5">
-                          {faq.question}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
-                          {faq.answer}
-                        </p>
+                  <div className="grid sm:grid-cols-2 gap-3 pt-2">
+                    {service.highlights.map((item) => (
+                      <div key={item} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#D32F2F] shrink-0 mt-1" />
+                        <span className="text-sm text-zinc-700 font-medium">
+                          {item}
+                        </span>
                       </div>
                     ))}
                   </div>
                 </div>
+              </MotionReveal>
+
+              {/* Cargo Types Handled */}
+              <MotionReveal direction="up" distance={14} delay={0.15}>
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-zinc-900">
+                    Typical Cargo Handled
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {service.cargoTypes.map((cargo) => (
+                      <div
+                        key={cargo}
+                        className="p-4 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center gap-3"
+                      >
+                        <div className="w-2 h-2 rounded-full bg-[#D32F2F]" />
+                        <span className="text-sm font-semibold text-zinc-800">
+                          {cargo}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </MotionReveal>
+
+              {/* Operational Benefits */}
+              <MotionReveal direction="up" distance={14} delay={0.18}>
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-zinc-900 flex items-center gap-2">
+                    <ShieldCheck className="w-5 h-5 text-[#D32F2F]" />
+                    Key Operational Advantages
+                  </h3>
+                  <ul className="space-y-3">
+                    {service.operationalBenefits.map((ben) => (
+                      <li
+                        key={ben}
+                        className="flex items-start gap-3 text-sm text-zinc-600"
+                      >
+                        <div className="w-5 h-5 rounded-full bg-red-50 text-[#D32F2F] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                          ✓
+                        </div>
+                        <span className="leading-relaxed">{ben}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </MotionReveal>
+
+              {/* Service FAQs */}
+              {service.faqs && service.faqs.length > 0 && (
+                <MotionReveal direction="up" distance={14} delay={0.2}>
+                  <div className="space-y-4 pt-6 border-t border-zinc-200">
+                    <h3 className="text-xl font-bold text-zinc-900 flex items-center gap-2">
+                      <HelpCircle className="w-5 h-5 text-[#D32F2F]" />
+                      Frequently Asked Questions
+                    </h3>
+                    <div className="space-y-3">
+                      {service.faqs.map((faq) => (
+                        <div
+                          key={faq.question}
+                          className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200"
+                        >
+                          <h4 className="font-bold text-zinc-900 text-sm mb-1.5">
+                            {faq.question}
+                          </h4>
+                          <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </MotionReveal>
               )}
             </div>
 
             {/* Right Column: Direct Booking Form (5 cols) */}
             <div className="lg:col-span-5">
-              <div className="sticky top-28">
-                <ContactForm />
-              </div>
+              <MotionReveal direction="left" distance={16} delay={0.1}>
+                <div className="sticky top-28">
+                  <ContactForm />
+                </div>
+              </MotionReveal>
             </div>
           </div>
         </div>

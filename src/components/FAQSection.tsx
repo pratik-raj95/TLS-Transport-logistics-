@@ -2,10 +2,13 @@
 
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SITE_CONFIG } from "@/config/site";
+import { MotionReveal, MotionStagger, MotionStaggerItem } from "./motion/MotionWrapper";
 
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const shouldReduceMotion = useReducedMotion();
 
   const toggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -14,7 +17,7 @@ export function FAQSection() {
   return (
     <section className="py-20 md:py-28 bg-white border-t border-zinc-200">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <MotionReveal className="text-center max-w-2xl mx-auto mb-16 space-y-3">
           <span className="inline-block text-xs font-extrabold tracking-widest text-[#D32F2F] uppercase bg-red-50 border border-red-100 px-4 py-1.5 rounded-full">
             CLEAR ANSWERS
           </span>
@@ -24,14 +27,14 @@ export function FAQSection() {
           <p className="text-zinc-600 text-base sm:text-lg">
             Essential operational information regarding our freight booking, route visibility, and cargo protection.
           </p>
-        </div>
+        </MotionReveal>
 
-        <div className="space-y-4">
+        <MotionStagger className="space-y-4" stagger={0.06}>
           {SITE_CONFIG.faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
 
             return (
-              <div
+              <MotionStaggerItem
                 key={faq.question}
                 className="rounded-2xl border border-zinc-200/90 overflow-hidden bg-white shadow-sm transition-all duration-200"
               >
@@ -53,15 +56,26 @@ export function FAQSection() {
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-zinc-600 text-sm sm:text-base leading-relaxed border-t border-zinc-100 pt-4 animate-in fade-in duration-200">
-                    <p>{faq.answer}</p>
-                  </div>
-                )}
-              </div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={shouldReduceMotion ? { opacity: 1 } : { height: 0, opacity: 0 }}
+                      animate={shouldReduceMotion ? { opacity: 1 } : { height: "auto", opacity: 1 }}
+                      exit={shouldReduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: [0.21, 0.47, 0.32, 0.98] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-zinc-600 text-sm sm:text-base leading-relaxed border-t border-zinc-100 pt-4">
+                        <p>{faq.answer}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </MotionStaggerItem>
             );
           })}
-        </div>
+        </MotionStagger>
       </div>
     </section>
   );

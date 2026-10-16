@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ChevronRight, FileText } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
+import { MotionReveal } from "@/components/motion/MotionWrapper";
 
 export const metadata = {
   title: `Terms & Conditions | ${SITE_CONFIG.brandName}`,
@@ -13,7 +14,7 @@ export default function TermsConditionsPage() {
     <div className="flex flex-col w-full">
       {/* Header */}
       <section className="relative pt-36 md:pt-44 pb-16 bg-black text-white overflow-hidden border-b border-zinc-900">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
+        <MotionReveal className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-2 text-xs font-semibold text-zinc-400 mb-4">
             <Link href="/" className="hover:text-white transition-colors">
               Home
@@ -30,12 +31,12 @@ export default function TermsConditionsPage() {
           <p className="text-zinc-400 text-sm md:text-base mt-2">
             Last Updated: January 2026 | {SITE_CONFIG.companyName}
           </p>
-        </div>
+        </MotionReveal>
       </section>
 
       {/* Content */}
       <section className="py-16 md:py-24 bg-white text-zinc-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8 leading-relaxed">
+        <MotionReveal className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8 leading-relaxed">
           <div>
             <h2 className="text-xl font-bold text-zinc-900 mb-3 flex items-center gap-2">
               <FileText className="w-5 h-5 text-[#D32F2F]" />
@@ -65,7 +66,7 @@ export default function TermsConditionsPage() {
               All commercial engagements, freight disputes, and transport service agreements are subject to the exclusive jurisdiction of the competent courts in Jhajjar/Haryana, India.
             </p>
           </div>
-        </div>
+        </MotionReveal>
       </section>
     </div>
   );

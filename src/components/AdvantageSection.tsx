@@ -3,6 +3,7 @@
 import React from "react";
 import { Headphones, Globe, ShieldCheck, Users, CheckCircle2, Building2 } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
+import { MotionReveal, MotionStagger, MotionStaggerItem } from "./motion/MotionWrapper";
 
 export function AdvantageSection() {
   const advantages = [
@@ -44,7 +45,7 @@ export function AdvantageSection() {
       <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-[#D32F2F]/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <MotionReveal className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <span className="inline-block text-xs font-extrabold tracking-widest text-[#D32F2F] uppercase bg-red-950/60 border border-red-900/40 px-4 py-1.5 rounded-full">
             WHY CHOOSE US
           </span>
@@ -55,15 +56,15 @@ export function AdvantageSection() {
           <p className="text-zinc-400 text-base sm:text-lg">
             What makes us India&apos;s dependable enterprise logistics partner.
           </p>
-        </div>
+        </MotionReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <MotionStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" stagger={0.08}>
           {advantages.map((adv) => {
             const Icon = adv.icon;
             return (
-              <div
+              <MotionStaggerItem
                 key={adv.title}
-                className="p-8 rounded-3xl bg-[#141414] border border-zinc-800/80 hover:border-red-900/50 hover:bg-[#181818] transition-all duration-300 flex flex-col justify-between group"
+                className="p-8 rounded-3xl bg-[#141414] border border-zinc-800/80 hover:border-red-900/50 hover:bg-[#181818] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shadow-sm hover:shadow-xl hover:shadow-black/40"
               >
                 <div>
                   <div className="w-14 h-14 rounded-2xl bg-red-950/40 border border-red-900/30 flex items-center justify-center text-[#D32F2F] mb-6 group-hover:scale-110 group-hover:bg-[#D32F2F] group-hover:text-white transition-all duration-300 shadow-md">
@@ -83,10 +84,10 @@ export function AdvantageSection() {
                     Verified Standard
                   </span>
                 </div>
-              </div>
+              </MotionStaggerItem>
             );
           })}
-        </div>
+        </MotionStagger>
       </div>
     </section>
   );

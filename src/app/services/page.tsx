@@ -2,6 +2,7 @@ import React from "react";
 import { ServicesSection } from "@/components/ServicesSection";
 import { CtaBanner } from "@/components/CtaBanner";
 import { SITE_CONFIG } from "@/config/site";
+import { MotionHero } from "@/components/motion/MotionWrapper";
 
 export const metadata = {
   title: `Our Logistics Services | ${SITE_CONFIG.brandName}`,
@@ -16,19 +17,24 @@ export default function ServicesPage() {
       <section className="relative pt-36 md:pt-44 pb-20 bg-black text-white overflow-hidden border-b border-zinc-900">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#D32F2F]/15 rounded-full blur-[140px] pointer-events-none" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-xs font-bold tracking-[0.2em] text-white uppercase bg-white/5 backdrop-blur-md">
-            ENTERPRISE LOGISTICS
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white">
-            Our <span className="text-[#D32F2F]">Logistics Services</span>
-          </h1>
-
-          <p className="text-zinc-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-normal leading-relaxed">
-            Reliable, secure, and fully verified fleet solutions customized for your exact supply chain operations.
-          </p>
-        </div>
+        <MotionHero
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center space-y-4"
+          eyebrow={
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-xs font-bold tracking-[0.2em] text-white uppercase bg-white/5 backdrop-blur-md">
+              ENTERPRISE LOGISTICS
+            </div>
+          }
+          heading={
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white">
+              Our <span className="text-[#D32F2F]">Logistics Services</span>
+            </h1>
+          }
+          description={
+            <p className="text-zinc-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-normal leading-relaxed">
+              Reliable, secure, and fully verified fleet solutions customized for your exact supply chain operations.
+            </p>
+          }
+        />
       </section>
 
       {/* 2. Full 13-Service Grid */}

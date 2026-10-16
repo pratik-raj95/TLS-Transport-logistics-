@@ -5,12 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Phone, Menu, X, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SITE_CONFIG } from "@/config/site";
 import { TopHeader } from "./TopHeader";
 
 export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
@@ -100,54 +103,62 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden mt-2 p-5 bg-white rounded-2xl border border-zinc-200/90 shadow-2xl flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
-            <nav className="flex flex-col space-y-1">
-              {SITE_CONFIG.navLinks.map((item) => {
-                const isActive =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : pathname === item.href || pathname.startsWith(item.href + "/");
+        {/* Mobile Dropdown Menu with AnimatePresence */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -10, scale: 0.98 }}
+              animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -10, scale: 0.98 }}
+              transition={{ duration: 0.22, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="lg:hidden mt-2 p-5 bg-white rounded-2xl border border-zinc-200/90 shadow-2xl flex flex-col gap-3"
+            >
+              <nav className="flex flex-col space-y-1">
+                {SITE_CONFIG.navLinks.map((item) => {
+                  const isActive =
+                    item.href === "/"
+                      ? pathname === "/"
+                      : pathname === item.href || pathname.startsWith(item.href + "/");
 
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`px-4 py-3 rounded-xl text-base font-semibold transition-colors flex items-center justify-between ${
-                      isActive
-                        ? "bg-red-50 text-[#D32F2F] font-bold"
-                        : "text-zinc-700 hover:bg-zinc-100"
-                    }`}
-                  >
-                    <span>{item.label}</span>
-                    {isActive && <span className="w-2 h-2 rounded-full bg-[#D32F2F]" />}
-                  </Link>
-                );
-              })}
-            </nav>
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`px-4 py-3 rounded-xl text-base font-semibold transition-colors flex items-center justify-between ${
+                        isActive
+                          ? "bg-red-50 text-[#D32F2F] font-bold"
+                          : "text-zinc-700 hover:bg-zinc-100"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {isActive && <span className="w-2 h-2 rounded-full bg-[#D32F2F]" />}
+                    </Link>
+                  );
+                })}
+              </nav>
 
-            <div className="pt-3 border-t border-zinc-100 flex flex-col gap-2">
-              <a
-                href={SITE_CONFIG.phoneLink}
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-zinc-100 text-zinc-800 font-bold text-sm"
-              >
-                <Phone className="w-4 h-4 text-[#D32F2F]" />
-                <span>Call Desk: {SITE_CONFIG.phoneDisplay}</span>
-              </a>
+              <div className="pt-3 border-t border-zinc-100 flex flex-col gap-2">
+                <a
+                  href={SITE_CONFIG.phoneLink}
+                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-zinc-100 text-zinc-800 font-bold text-sm"
+                >
+                  <Phone className="w-4 h-4 text-[#D32F2F]" />
+                  <span>Call Desk: {SITE_CONFIG.phoneDisplay}</span>
+                </a>
 
-              <Link
-                href="/quote"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#D32F2F] text-white font-bold text-sm shadow-lg shadow-red-700/25"
-              >
-                <span>Request Dispatch Quote</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        )}
+                <Link
+                  href="/quote"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#D32F2F] text-white font-bold text-sm shadow-lg shadow-red-700/25 active:scale-95"
+                >
+                  <span>Request Dispatch Quote</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );

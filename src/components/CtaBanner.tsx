@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
+import { MotionReveal } from "./motion/MotionWrapper";
 
 interface CtaBannerProps {
   title: string;
@@ -30,7 +31,7 @@ export function CtaBanner({
         {/* Subtle background glow & texture */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-black/30 pointer-events-none" />
 
-        <div className="relative z-10 max-w-4xl mx-auto space-y-6">
+        <MotionReveal className="relative z-10 max-w-4xl mx-auto space-y-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-white">
             {title}
           </h2>
@@ -57,7 +58,7 @@ export function CtaBanner({
               </a>
             )}
           </div>
-        </div>
+        </MotionReveal>
       </section>
     );
   }
@@ -68,7 +69,7 @@ export function CtaBanner({
       {/* Decorative radial lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#D32F2F]/15 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto space-y-5">
+      <MotionReveal className="relative z-10 max-w-4xl mx-auto space-y-5">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
           {title}
         </h2>
@@ -94,7 +95,7 @@ export function CtaBanner({
             </Link>
           )}
         </div>
-      </div>
+      </MotionReveal>
     </section>
   );
 }

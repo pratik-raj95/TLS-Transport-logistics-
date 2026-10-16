@@ -2,6 +2,7 @@ import React from "react";
 import { MapPin, Phone, Clock, MessageSquare } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { SITE_CONFIG } from "@/config/site";
+import { MotionHero, MotionReveal, MotionStagger, MotionStaggerItem } from "@/components/motion/MotionWrapper";
 
 export const metadata = {
   title: `Contact Us | ${SITE_CONFIG.brandName}`,
@@ -16,19 +17,24 @@ export default function ContactPage() {
       <section className="relative pt-36 md:pt-44 pb-20 bg-black text-white overflow-hidden border-b border-zinc-900">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#D32F2F]/15 rounded-full blur-[140px] pointer-events-none" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-xs font-bold tracking-[0.2em] text-white uppercase bg-white/5 backdrop-blur-md">
-            GET IN TOUCH
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white">
-            Contact <span className="text-[#D32F2F]">Our Logistics Desk</span>
-          </h1>
-
-          <p className="text-zinc-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-normal leading-relaxed">
-            Get in touch with our operations desk for instant truck booking, container scheduling, and rate inquiries.
-          </p>
-        </div>
+        <MotionHero
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center space-y-4"
+          eyebrow={
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-xs font-bold tracking-[0.2em] text-white uppercase bg-white/5 backdrop-blur-md">
+              GET IN TOUCH
+            </div>
+          }
+          heading={
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white">
+              Contact <span className="text-[#D32F2F]">Our Logistics Desk</span>
+            </h1>
+          }
+          description={
+            <p className="text-zinc-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-normal leading-relaxed">
+              Get in touch with our operations desk for instant truck booking, container scheduling, and rate inquiries.
+            </p>
+          }
+        />
       </section>
 
       {/* 2. Main 2-Column Contact Section */}
@@ -37,21 +43,23 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Official Details & Map (5 cols) */}
             <div className="lg:col-span-5 space-y-8">
-              <div className="space-y-3">
-                <span className="text-xs font-extrabold tracking-widest text-[#D32F2F] uppercase">
-                  DIRECT CONTACT
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">
-                  Registered Operational Hub
-                </h2>
-                <p className="text-zinc-600 text-sm leading-relaxed">
-                  Our operations team coordinates all inter-state dispatch, vehicle placement, and telematics monitoring from our central facility.
-                </p>
-              </div>
+              <MotionReveal direction="right" distance={16}>
+                <div className="space-y-3">
+                  <span className="text-xs font-extrabold tracking-widest text-[#D32F2F] uppercase">
+                    DIRECT CONTACT
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">
+                    Registered Operational Hub
+                  </h2>
+                  <p className="text-zinc-600 text-sm leading-relaxed">
+                    Our operations team coordinates all inter-state dispatch, vehicle placement, and telematics monitoring from our central facility.
+                  </p>
+                </div>
+              </MotionReveal>
 
               {/* Contact Detail Cards */}
-              <div className="space-y-4">
-                <div className="p-5 rounded-2xl bg-white border border-zinc-200/90 shadow-sm flex items-start gap-4">
+              <MotionStagger className="space-y-4" stagger={0.08}>
+                <MotionStaggerItem className="p-5 rounded-2xl bg-white border border-zinc-200/90 shadow-sm flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-red-50 text-[#D32F2F] flex items-center justify-center shrink-0 mt-0.5">
                     <MapPin className="w-5 h-5 text-[#D32F2F]" />
                   </div>
@@ -63,9 +71,9 @@ export default function ContactPage() {
                       {SITE_CONFIG.address}
                     </p>
                   </div>
-                </div>
+                </MotionStaggerItem>
 
-                <div className="p-5 rounded-2xl bg-white border border-zinc-200/90 shadow-sm flex items-start gap-4">
+                <MotionStaggerItem className="p-5 rounded-2xl bg-white border border-zinc-200/90 shadow-sm flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-red-50 text-[#D32F2F] flex items-center justify-center shrink-0 mt-0.5">
                     <Phone className="w-5 h-5 text-[#D32F2F]" />
                   </div>
@@ -92,9 +100,9 @@ export default function ContactPage() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </MotionStaggerItem>
 
-                <div className="p-5 rounded-2xl bg-white border border-zinc-200/90 shadow-sm flex items-start gap-4">
+                <MotionStaggerItem className="p-5 rounded-2xl bg-white border border-zinc-200/90 shadow-sm flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
                     <MessageSquare className="w-5 h-5" />
                   </div>
@@ -114,9 +122,9 @@ export default function ContactPage() {
                       Chat with Operations on WhatsApp ➔
                     </a>
                   </div>
-                </div>
+                </MotionStaggerItem>
 
-                <div className="p-5 rounded-2xl bg-white border border-zinc-200/90 shadow-sm flex items-start gap-4">
+                <MotionStaggerItem className="p-5 rounded-2xl bg-white border border-zinc-200/90 shadow-sm flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-red-50 text-[#D32F2F] flex items-center justify-center shrink-0 mt-0.5">
                     <Clock className="w-5 h-5 text-[#D32F2F]" />
                   </div>
@@ -131,28 +139,32 @@ export default function ContactPage() {
                       (24/7 Active Transit Monitoring for In-Flight Vehicles)
                     </p>
                   </div>
-                </div>
-              </div>
+                </MotionStaggerItem>
+              </MotionStagger>
 
               {/* Embedded Interactive Google Map */}
-              <div className="rounded-2xl overflow-hidden border border-zinc-300 shadow-md">
-                <iframe
-                  title="TLS Transport Central Depot Map"
-                  src={SITE_CONFIG.googleMapsEmbed}
-                  width="100%"
-                  height="260"
-                  style={{ border: 0 }}
-                  allowFullScreen={false}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full grayscale hover:grayscale-0 transition-all duration-500"
-                />
-              </div>
+              <MotionReveal direction="up" distance={16} delay={0.2}>
+                <div className="rounded-2xl overflow-hidden border border-zinc-300 shadow-md">
+                  <iframe
+                    title="TLS Transport Central Depot Map"
+                    src={SITE_CONFIG.googleMapsEmbed}
+                    width="100%"
+                    height="260"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full grayscale hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+              </MotionReveal>
             </div>
 
             {/* Right Column: Contact & Dispatch Form (7 cols) */}
             <div className="lg:col-span-7">
-              <ContactForm />
+              <MotionReveal direction="left" distance={16} delay={0.1}>
+                <ContactForm />
+              </MotionReveal>
             </div>
           </div>
         </div>

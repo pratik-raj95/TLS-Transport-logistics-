@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface SlideData {
   title: string;
@@ -99,6 +100,7 @@ export function HeroSection() {
   }, [activeSlide]);
 
   const slide = SLIDES[activeSlide];
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black text-white pt-24 pb-16">
@@ -127,36 +129,59 @@ export function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-16 md:pt-24 flex flex-col md:flex-row items-center justify-between gap-10">
         <div className="space-y-6 flex flex-col items-start text-left w-full max-w-3xl">
           {/* Eyebrow badge pill */}
-          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/20 text-xs font-bold tracking-[0.2em] text-white uppercase bg-black/40 backdrop-blur-md shadow-sm">
+          <motion.div
+            key={`eyebrow-${activeSlide}`}
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/20 text-xs font-bold tracking-[0.2em] text-white uppercase bg-black/40 backdrop-blur-md shadow-sm"
+          >
             <span className="w-2 h-2 rounded-full bg-[#D32F2F] animate-pulse" />
             <span>{slide.tag}</span>
-          </div>
+          </motion.div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-white">
+          <motion.h1
+            key={`h1-${activeSlide}`}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-white"
+          >
             {slide.title}{" "}
             <span className="text-stroke-white font-extrabold tracking-wide">
               {slide.outlineWord}
             </span>{" "}
             <br className="hidden sm:inline" />
             Across India.
-          </h1>
+          </motion.h1>
 
           {/* Subtitles */}
-          <div className="space-y-2 w-full">
+          <motion.div
+            key={`sub-${activeSlide}`}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="space-y-2 w-full"
+          >
             <p className="text-lg md:text-2xl text-white font-semibold leading-relaxed">
               {slide.subTitle}
             </p>
             <p className="text-sm md:text-base text-zinc-300 leading-relaxed font-normal max-w-2xl">
               {slide.description}
             </p>
-          </div>
+          </motion.div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto">
+          <motion.div
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.28, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto"
+          >
             <Link
               href="/quote"
-              className="w-full sm:w-auto group inline-flex items-center justify-center gap-3 bg-[#D32F2F] text-white font-bold px-8 py-4 rounded-xl text-xs sm:text-sm tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 shadow-xl shadow-red-950/50"
+              className="w-full sm:w-auto group inline-flex items-center justify-center gap-3 bg-[#D32F2F] text-white font-bold px-8 py-4 rounded-xl text-xs sm:text-sm tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 shadow-xl shadow-red-950/50 active:scale-95"
             >
               <span>REQUEST QUOTE</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -164,11 +189,11 @@ export function HeroSection() {
 
             <Link
               href="/services"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 text-white font-bold px-8 py-4 rounded-xl text-xs sm:text-sm tracking-widest uppercase border border-white/30 bg-white/10 hover:bg-white/20 hover:border-white transition-all duration-300 backdrop-blur-md"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 text-white font-bold px-8 py-4 rounded-xl text-xs sm:text-sm tracking-widest uppercase border border-white/30 bg-white/10 hover:bg-white/20 hover:border-white transition-all duration-300 backdrop-blur-md active:scale-95"
             >
               <span>DISCOVER SERVICES</span>
             </Link>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right Side Slide Controls (01 to 07) */}

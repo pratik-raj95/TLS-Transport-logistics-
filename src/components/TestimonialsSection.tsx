@@ -3,12 +3,13 @@
 import React from "react";
 import { Star, Quote } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
+import { MotionReveal, MotionStagger, MotionStaggerItem } from "./motion/MotionWrapper";
 
 export function TestimonialsSection() {
   return (
     <section className="py-20 md:py-28 bg-zinc-50 border-t border-zinc-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <MotionReveal className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <span className="inline-block text-xs font-extrabold tracking-widest text-[#D32F2F] uppercase bg-red-50 border border-red-100 px-4 py-1.5 rounded-full">
             CLIENT SATISFACTION
           </span>
@@ -18,13 +19,13 @@ export function TestimonialsSection() {
           <p className="text-zinc-600 text-base sm:text-lg">
             Verifiable feedback from industrial shippers, plant logistics heads, and distribution partners.
           </p>
-        </div>
+        </MotionReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <MotionStagger className="grid grid-cols-1 md:grid-cols-3 gap-8" stagger={0.1}>
           {SITE_CONFIG.testimonials.map((t) => (
-            <div
+            <MotionStaggerItem
               key={t.name}
-              className="p-8 rounded-3xl bg-white border border-zinc-200/90 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between"
+              className="p-8 rounded-3xl bg-white border border-zinc-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
@@ -54,9 +55,9 @@ export function TestimonialsSection() {
                   {t.sector}
                 </span>
               </div>
-            </div>
+            </MotionStaggerItem>
           ))}
-        </div>
+        </MotionStagger>
       </div>
     </section>
   );
